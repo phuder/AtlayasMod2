@@ -4,6 +4,9 @@ using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using Terraria.IO;
+using Terraria.GameContent.Generation;
+using Terraria.DataStructures;
 
 namespace AtlayasMod.WorldGen
 {
@@ -11,7 +14,7 @@ namespace AtlayasMod.WorldGen
     {
         public static bool AquilaDefeated = false; // Tracks whether Aquila has been defeated
 
-        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref float totalWeight)
+        public override void ModifyWorldGenTasks(List<GenPass> tasks, ref double totalWeight)
         {
             int index = tasks.FindIndex(pass => pass.Name.Equals("Shore"));
 
@@ -33,17 +36,21 @@ namespace AtlayasMod.WorldGen
             {
                 for (int y = 0; y < Main.maxTilesY; y++)
                 {
-                    Main.tile[x, y].LiquidAmount = 255;
-                    Main.tile[x, y].LiquidType = LiquidID.Water;
+                    Tile tile = Main.tile[x, y];
+                    tile.LiquidAmount = 255;
+                    tile.LiquidType = LiquidID.Water;
                 }
-            }
+            }  
+  
 
             for (int x = oceanRight - oceanExpansion; x < oceanRight; x++)
             {
                 for (int y = 0; y < Main.maxTilesY; y++)
                 {
-                    Main.tile[x, y].LiquidAmount = 255;
-                    Main.tile[x, y].LiquidType = LiquidID.Water;
+                     Tile tile = Main.tile[x, y];
+                     tile.LiquidAmount = 255;
+                     tile.LiquidType = LiquidID.Water;
+                    
                 }
             }
         }
