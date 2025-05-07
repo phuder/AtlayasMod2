@@ -1,0 +1,3 @@
+displayName = Atlayas Mod
+author = Scarlet Temple
+version = 0.1

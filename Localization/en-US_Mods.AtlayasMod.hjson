@@ -1,0 +1,18 @@
+Tiles.SelsaOre.MapEntry: Selsa Ore
+
+WorldGen: {
+	SelsaOrePassMessage: Mods.AtlayasMod.WorldGen.SelsaOrePassMessage
+	BlessedWithSelsaOreMessage: Mods.AtlayasMod.WorldGen.BlessedWithSelsaOreMessage
+}
+
+Items: {
+	SelsaBar: {
+		DisplayName: Selsa Bar
+		Tooltip: ""
+	}
+
+	SelsaOre: {
+		DisplayName: Selsa Ore
+		Tooltip: ""
+	}
+}
