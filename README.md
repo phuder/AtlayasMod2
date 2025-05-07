@@ -1,5 +1,16 @@
-# Atlayas Mod
-Atlayas Mod is a large content mod that focuses on the elements- water, desert, forest, ice and fire. This mod adds temples that the player is required to go through, tons of cool boss fights, and lots of items, 3 new biomes, one new minibiome, fun and more! check the discord for the lore!
+<div align="center">
+  <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=3408391079">
+    <img src="icon_workshop.png" alt="Logo" width="150">
+  </a>
+
+  <h3 align="center">Atlayas Mod</h3>
+
+Atlayas Mod is a large content mod that focuses on the elements- water, desert, forest, ice and fire. This mod adds temples that the player is required to go through, tons of cool boss fights, and lots of items, 3 new biomes, one new minibiome, fun and more!
+
+  <p align="center">
+    <a href="https://github.com/emyhrberg/ModHelper/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">Join the discord!</a>
+  </p>
+</div>
 
 # Lore
 Long ago, the five sacred temples—Water, Desert, Forest, Ice, and Fire—stood as pillars of balance across the realm of Atlayas. Each temple, guarded by an Elemental Judgment—Titus, Sahara, Faunus, Crystal, and Phoenix—served as a bastion of harmony, ensuring that the elements remained in equilibrium.
