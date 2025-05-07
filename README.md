@@ -1,0 +1,13 @@
+# Atlayas Mod
+Atlayas Mod is a large content mod that focuses on the elements- water, desert, forest, ice and fire. This mod adds temples that the player is required to go through, tons of cool boss fights, and lots of items, 3 new biomes, one new minibiome, fun and more! check the discord for the lore!
+
+# Lore
+Long ago, the five sacred temples—Water, Desert, Forest, Ice, and Fire—stood as pillars of balance across the realm of Atlayas. Each temple, guarded by an Elemental Judgment—Titus, Sahara, Faunus, Crystal, and Phoenix—served as a bastion of harmony, ensuring that the elements remained in equilibrium.
+But darkness crept forth. Ataval, a monstrous entity of fire and ice, emerged from the abyss, driven by an insatiable desire to reshape the world in his image—a land where destruction reigned supreme. His army of servants stormed the temples, shattering their protective seals and casting out the Judgments, forcing them into exile.
+With the temples defiled and chaos unfurling across the lands, hope seemed lost. That is—until you arrived.
+Venturing into the poisoned waters of the Water Temple, you uncover the first traces of Ataval’s corruption. The ocean, once teeming with life, is now a venomous graveyard. As you push through its depths and challenge the tyrant within, you begin the arduous journey of reclaiming the sacred grounds.
+Each temple presents a new battle, a new trial. As you liberate one after another, the expelled Judgments take notice. Titus, the Judgment of Water, finds you first—but distrust lingers in his heart. In a world shattered by deception, can he afford to trust another? His blade meets yours in combat, testing your resolve.
+One by one, the Judgments emerge—Sahara from the desert’s shifting sands, Faunus from the heart of the wilds, Crystal from the frozen depths, and Phoenix from the infernal lands. Each battle is a test, a reckoning—until only Ataval remains. 
+The final confrontation is more than a mere clash of swords and magic—it is a battle for the soul of Atlayas itself. As you strike down Ataval in a blinding explosion of elemental fury, the force of his demise knocks you into unconsciousness.
+Silence. Then, a hand. Titus kneels beside you, the weight of the battle now clear in his mind. You have fought, you have endured, and you have proven yourself. With renewed faith, Titus revives you, and alongside the Elemental Judgments, they reclaim the temples and vow to guard not just their domains—but the entire world.
+Balance is restored. But Atlayas will forever remember the day the elements were nearly consumed by fire and ice. 
