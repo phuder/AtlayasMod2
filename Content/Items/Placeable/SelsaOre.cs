@@ -16,7 +16,7 @@ namespace AtlayasMod.Content.Items.Placeable
 		}
 
 		public override void SetDefaults() {
-			Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SelsaOre>());
+			//Item.DefaultToPlaceableTile(ModContent.TileType<Tiles.SelsaOre>());
 			Item.width = 12;
 			Item.height = 12;
 			Item.value = 3000;
