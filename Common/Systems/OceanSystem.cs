@@ -7,7 +7,7 @@ namespace AtlayasMod.Common.Systems
     {
         public OceanSystem()
         {
-            Log.Info("Calling OceanSystem()");
+            Log.Info("Calling OceanSystem() 2");
         }
 
         public override bool UpdateLiquid(int i, int j, int type, Liquid liquid)
