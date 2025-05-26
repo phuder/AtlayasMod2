@@ -1,5 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
+using Microsoft.Xna.Framework;
+using AtlayasMod.Common.Projectiles;
 
 namespace AtlayasMod.Common.Systems
 {

@@ -1,24 +1,25 @@
+using AtlayasMod.Common.Projectiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.Audio;
+using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System;
-using System.Collections.Generic;
 
 namespace AtlayasMod.Common.Systems
 {
     public class HurricaneEvent : ModSystem
     {
         public static bool IsHurricaneActive => ModContent.GetInstance<HurricaneEvent>().hurricaneActive;
-        public static int WrathOfTheWindMusicSlot => wrathOfTheWindMusicSlot;
+        public static int WrathOfTheWindMusicSlot { get; private set; }
         private bool hurricaneActive = false;
         private int hurricaneDuration = 0;
         private int thunderTimer = 0;
-        private const int HurricaneLength = 60 * 60 * 2; // 2 min
-        private static int wrathOfTheWindMusicSlot = -1;
+        private const int HurricaneLength = 60 * 60 * 2; // You can adjust the length of the hurricane here (2 hours in-game time) here
 
         #region Custom Particle System (commented out for now)
         /*
@@ -41,7 +42,7 @@ namespace AtlayasMod.Common.Systems
             if (!Main.dedServ)
             {
                 // Register music
-                wrathOfTheWindMusicSlot = MusicLoader.GetMusicSlot(Mod, "Assets/WrathOfTheWind");
+                WrathOfTheWindMusicSlot = MusicLoader.GetMusicSlot(Mod, "AtlayasMod/Assets/Music/Wrath Of The Wind");
                 /*
                 // Load particle texture (fallback to MagicPixel if not found)
                 if (ModContent.HasAsset("AtlayasMod/Assets/Images/HurricaneParticle"))
@@ -73,11 +74,11 @@ namespace AtlayasMod.Common.Systems
         public override void PreUpdateWorld()
         {
             // 30% chance each day at dawn (4:30 AM in Terraria)
-            if (Main.time == 0 && !hurricaneActive && Main.dayTime)
+            if (Main.time == 0 && !hurricaneActive && Main.dayTime) //adjust start time of the event here
             {
                 foreach (Player player in Main.player)
                 {
-                    if (player.active && player.ZoneBeach && Main.rand.NextFloat() < 0.3f)
+                    if (player.active && player.ZoneBeach && Main.rand.NextFloat() < 0.9f)
                     {
                         StartHurricane();
                         break;
@@ -117,6 +118,14 @@ namespace AtlayasMod.Common.Systems
         private void EndHurricane()
         {
             hurricaneActive = false;
+            // Reset wind to calm when hurricane ends
+            Main.windSpeedTarget = 0f;
+            Main.windSpeedCurrent = 0f;
+            // Turn off rain and clouds
+            Main.raining = false;
+            Main.rainTime = 0;
+            Main.maxRaining = 0f;
+            Main.cloudBGActive = 0f;
         }
 
         public override void PostUpdateWorld()
@@ -125,8 +134,31 @@ namespace AtlayasMod.Common.Systems
                 return;
 
             Player player = Main.LocalPlayer;
-            if (!player.active || !player.ZoneBeach)
+
+            // If hurricane is active but player is not in the ocean biome, turn off rain for this player
+            if (hurricaneActive && (!player.active || !player.ZoneBeach))
+            {
+                Main.raining = false;
+                Main.rainTime = 0;
+                Main.maxRaining = 0f;
+                Main.cloudBGActive = 0f;
                 return;
+            }
+
+            // --- Dramatic wind for tree sway during hurricane --- (Touch the number more dramatic effect,or gut it completely)
+            // Randomly set wind direction and strength for a natural, stormy effect
+            if (Main.rand.NextBool(120)) // Change direction every ~2 seconds
+            {
+                Main.windSpeedTarget = Main.rand.NextFloat(1.2f, 1.7f) * (Main.rand.NextBool() ? 1 : -1);
+            }
+            // Smoothly interpolate current wind towards target
+            Main.windSpeedCurrent = MathHelper.Lerp(Main.windSpeedCurrent, Main.windSpeedTarget, 0.05f);
+
+            // --- Rain background and weather effect ---
+            Main.raining = true;
+            Main.rainTime = Math.Max(Main.rainTime, 60);
+            Main.cloudBGActive = 1f;
+            Main.maxRaining = 1f;
 
             // Thunder spawn logic
             thunderTimer--;
@@ -190,31 +222,34 @@ namespace AtlayasMod.Common.Systems
             #endregion
         }
 
-        private void SpawnThunder(Player player)
+        private void SpawnThunder(Player player) // Spawns a lightning strike at a random position above the screen (this should be self-explanatory)
         {
-            Vector2 strikePos = player.Center + new Vector2(Main.rand.Next(-600, 600), -400);
-            int proj = Projectile.NewProjectile(
-                null,
+            float x = Main.screenPosition.X + Main.rand.Next(Main.screenWidth);
+            float y = Main.screenPosition.Y - 120; // 120 pixels above the top of the screen
+            Vector2 strikePos = new Vector2(x, y);
+            Projectile.NewProjectile(
+                new EntitySource_Misc("HurricaneEvent"),
                 strikePos,
-                new Vector2(0, 10),
-                ProjectileID.VortexVortexLightning,
+                Vector2.Zero,// No initial velocity, i already set the velocity in the projectile itself
+                ModContent.ProjectileType<LightningProjectile>(),
                 60,
                 6f,
                 Main.myPlayer
             );
-            Main.projectile[proj].hostile = true;
         }
 
-        public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor)
+        public override void ModifySunLightColor(ref Color tileColor, ref Color backgroundColor) // This method darken the background and tile colors during the hurricane event
         {
             if (hurricaneActive && Main.LocalPlayer.active && Main.LocalPlayer.ZoneBeach)
             {
-                backgroundColor = Color.Black;
-                tileColor = Color.Black;
+                // Darken the background and tile colors a little bit
+                Color darkened = Color.Lerp(backgroundColor, new Color(40, 40, 40), 0.45f);
+                backgroundColor = darkened;
+                tileColor = darkened;
             }
         }
 
-        public override void ModifyScreenPosition()
+        public override void ModifyScreenPosition() // this method adds a slight screen shake effect during the hurricane event
         {
             if (hurricaneActive && Main.LocalPlayer.active && Main.LocalPlayer.ZoneBeach)
             {
@@ -222,7 +257,7 @@ namespace AtlayasMod.Common.Systems
             }
         }
 
-        public override void PostDrawInterface(SpriteBatch spriteBatch)
+        public override void PostDrawInterface(SpriteBatch spriteBatch)// Still here for future use, but currently unused
         {
             #region Custom Particle System (commented out for now)
             /*
