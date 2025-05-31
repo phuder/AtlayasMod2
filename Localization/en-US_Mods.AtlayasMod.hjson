@@ -50,11 +50,24 @@ Items: {
 		DisplayName: Selsa Sword
 		Tooltip: A completely normal sword
 	}
+
+	PosiedonsPressurizer: {
+		DisplayName: Posiedons Pressurizer
+		Tooltip: ""
+	}
+
+	StarfishOnAString: {
+		DisplayName: Starfish On A String
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
 	LightningProjectile.DisplayName: Lightning Projectile
 	BassBlast.DisplayName: Bass Blast
+	StarfishYoyo.DisplayName: Starfish Yoyo
+	WaterJet.DisplayName: Water Jet
+	WaterJetMelee.DisplayName: Water Jet Melee
 }
 
 Biomes: {
