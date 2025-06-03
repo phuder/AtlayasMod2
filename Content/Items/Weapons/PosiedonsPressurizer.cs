@@ -10,6 +10,7 @@ using Terraria;
 using Microsoft.Xna.Framework;
 using Terraria.DataStructures;
 using AtlayasMod.Content.Projectiles;
+using AtlayasMod.Content.Items.Placeable;
 
 
 namespace AtlayasMod.Content.Items.Weapons
@@ -106,6 +107,7 @@ namespace AtlayasMod.Content.Items.Weapons
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.WaterBucket, 5);
             recipe.AddIngredient(ItemID.IllegalGunParts);
+            recipe.AddIngredient(ModContent.ItemType<NeptuniumBar>(), 5);
             recipe.AddTile(TileID.Anvils);
             recipe.Register();
 

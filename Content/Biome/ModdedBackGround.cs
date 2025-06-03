@@ -7,63 +7,66 @@ using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace AtlayasMod.Content.Biome
-// My attempt at an animated main menu background,doesn't work so i disabled it for now.
+// 100% the code of example mod, just modified to fit the project XD
 {
-    /*public class AnimatedMainMenuBackgroundSystem : ModSystem
+    public class AtlayaSurfaceBackgroundStyle : ModSurfaceBackgroundStyle
     {
-        private Asset<Texture2D> _mainMenuTexture;
-        private const int FrameCount = 6;
-        private const int FrameSpeed = 9; // Ticks per frame (60 FPS / 9 ≈ 0.15s per frame)
-        private int _frameCounter;
-        private int _currentFrame;
+        private static int frameCounter = 0;
+        private static int currentFrame = 0;
+        private const int totalFrames = 6;
+        private const int frameDelay = 8; // Lower = faster animation
 
-        public override void Load()
+        // Animate all layers with the same frame for a full-screen effect
+        private int GetAnimatedFrame()
         {
-            _mainMenuTexture = ModContent.Request<Texture2D>("AtlayasMod/Assets/Textures/Menu/MainMenu");
+            frameCounter++;
+            if (frameCounter >= frameDelay)
+            {
+                frameCounter = 0;
+                currentFrame = (currentFrame + 1) % totalFrames;
+            }
+            return currentFrame;
         }
 
-        public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
+        public override void ModifyFarFades(float[] fades, float transitionSpeed)
         {
-            // Only draw on the main menu
-            if (!Main.gameMenu)
-                return;
-
-            int layerIndex = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Main Menu", System.StringComparison.Ordinal));
-            if (layerIndex != -1)
+            for (int i = 0; i < fades.Length; i++)
             {
-                layers.Insert(layerIndex, new LegacyGameInterfaceLayer(
-                    "AtlayasMod: Animated Main Menu Background",
-                    DrawAnimatedBackground,
-                    InterfaceScaleType.UI)
-                );
+                if (i == Slot)
+                {
+                    fades[i] += transitionSpeed;
+                    if (fades[i] > 1f)
+                        fades[i] = 1f;
+                }
+                else
+                {
+                    fades[i] -= transitionSpeed;
+                    if (fades[i] < 0f)
+                        fades[i] = 0f;
+                }
             }
         }
 
-        private bool DrawAnimatedBackground()
+        public override int ChooseFarTexture()
         {
-            if (_mainMenuTexture?.Value == null)
-                return true;
-
-            // Animate frames
-            _frameCounter++;
-            if (_frameCounter > FrameSpeed)
-            {
-                _currentFrame = (_currentFrame + 1) % FrameCount;
-                _frameCounter = 0;
-            }
-
-            Texture2D texture = _mainMenuTexture.Value;
-            int frameWidth = texture.Width / FrameCount;
-            Rectangle sourceRect = new Rectangle(_currentFrame * frameWidth, 0, frameWidth, texture.Height);
-
-            Main.spriteBatch.Draw(
-                texture,
-                new Rectangle(0, 0, Main.screenWidth, Main.screenHeight),
-                sourceRect,
-                Color.White
-            );
-
-            return true; // Continue drawing other layers
+            int frame = GetAnimatedFrame();
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Assets/Textures/Backgrounds/Bg6");
         }
-    }*/
+
+        public override int ChooseMiddleTexture()
+        {
+            int frame = GetAnimatedFrame();
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Assets/Textures/Backgrounds/Bg{frame + 1}");
+        }
+
+        public override int ChooseCloseTexture(ref float scale, ref double parallax, ref float a, ref float b)
+        {
+            int frame = GetAnimatedFrame();
+            scale = 1f;
+            parallax = 0.0;
+            a = 0f;
+            b = 0f;
+            return BackgroundTextureLoader.GetBackgroundSlot(Mod, $"Assets/Textures/Backgrounds/Bg1");
+        }
+    }
 }

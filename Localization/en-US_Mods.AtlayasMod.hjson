@@ -60,6 +60,26 @@ Items: {
 		DisplayName: Starfish On A String
 		Tooltip: ""
 	}
+
+	NeptuniumBar: {
+		DisplayName: Neptunium Bar
+		Tooltip: ""
+	}
+
+	NeptuniumHamaxe: {
+		DisplayName: Neptunium Hamaxe
+		Tooltip: ""
+	}
+
+	SelsaSpear: {
+		DisplayName: Selsa Spear
+		Tooltip: ""
+	}
+
+	SelsaYoyo: {
+		DisplayName: Selsa Yoyo
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
@@ -68,6 +88,8 @@ Projectiles: {
 	StarfishYoyo.DisplayName: Starfish Yoyo
 	WaterJet.DisplayName: Water Jet
 	WaterJetMelee.DisplayName: Water Jet Melee
+	SelsaSpearProjectile.DisplayName: Selsa Spear Projectile
+	SelsaYoyoProjectile.DisplayName: Selsa Yoyo Projectile
 }
 
 Biomes: {

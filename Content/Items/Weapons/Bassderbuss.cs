@@ -39,7 +39,7 @@ namespace AtlayasMod.Content.Items.Weapons
         public override bool Shoot(Player player, EntitySource_ItemUse_WithAmmo source, Vector2 position, Vector2 velocity, int type, int damage, float knockback)
         {
             const int NumProjectiles = 3; // The number of projectiles that this gun will shoot.
-            SoundEngine.PlaySound(SoundID.DSTMaleHurt, player.position);
+            SoundEngine.PlaySound(new SoundStyle("AtlayasMod/Assets/Sfx/AirhornSfx"), player.position);
             for (int i = 0; i < NumProjectiles; i++)
             {
                 // Rotate the velocity randomly by 30 degrees at max.

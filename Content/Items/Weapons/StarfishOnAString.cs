@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AtlayasMod.Content.Items.Placeable;
+using AtlayasMod.Content.Projectiles;
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
-using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using AtlayasMod.Content.Projectiles;
 
 namespace AtlayasMod.Content.Items.Weapons
 {
@@ -99,6 +100,7 @@ namespace AtlayasMod.Content.Items.Weapons
             Recipe recipe = CreateRecipe();
             recipe.AddIngredient(ItemID.Starfish, 5);
             recipe.AddIngredient(ItemID.WoodYoyo);
+            recipe.AddIngredient(ModContent.ItemType<NeptuniumBar>(), 5);
             recipe.AddTile(TileID.Anvils);
           
             recipe.Register();
